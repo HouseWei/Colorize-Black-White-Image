@@ -27,6 +27,7 @@ net.getLayer(class8).blobs = [pts.astype("float32")]
 net.getLayer(conv8).blobs = [np.full([1, 313], 2.606, dtype="float32")]
 
 ##load the input image
+print(args["image"])
 image = cv2.imread(args["image"])
 scaled = image.astype("float32") / 255.0
 lab = cv2.cvtColor(scaled, cv2.COLOR_BGR2LAB)
@@ -51,6 +52,8 @@ colorized = (255 * colorized).astype("uint8")
 
 cv2.imshow("Original", image)
 cv2.imshow("colorized", colorized)
+list = args["image"].split("/")
+cv2.imwrite(os.path.join(DIR, "results/"+list[len(list)-1]), colorized)
 cv2.waitKey(0)
 
 
